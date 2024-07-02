@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js 변수</title>
+    <script>
+        var age = 30 // 전역변수 선언
+        
+        let score = 70
+        function prn() { 
+            var age2=40 // 지역변수 선언 
+            age3=50 // var 없이 선언하면 지역변수 선언 
+        }
+        var age = 60 // 재선언은 별로 좋지 않음
+        age = 70 // var 변수에 할당 
+
+        // let score = 80 // 에러
+        score = 80 // let 변수에 할당 
+
+        // alert(age2) // 에러 
+        // alert(age3) // 에러 
+    </script>
+    <script>
+        age = 40
+    </script>
+</head>
+<body>
+    <script> 
+        alert(age)
+    </script>
+    <h1> js 변수</h1>
+    
+</body>
+</html>

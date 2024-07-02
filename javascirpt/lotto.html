@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또번호 만들기</title>
+    <script>
+        //난수생성. Math.random()
+        let r = Math.random(); // 0 ~ 0.99999
+        console.log(r);
+        r *= 45 // 0 ~ 44.9999
+        console.log(r);
+        r = Math.floor(r); //정수만 남김  0 ~ 44
+        console.log(r);
+        r += 1 // 1~45
+        console.log(r)
+        ////////////////
+        r=Math.floor(Math.random()*45)
+        console.log(r)
+        // 난수를 6번 만들어 배열에 저장
+        let lotto = [] //빈배열
+        for(let i=0; i<6; i++){
+            r = Math.floor(Math.random()*45)+1;
+            lotto.push(r)
+        }
+        console.log("로또번호:", lotto) // 중복 배열 가능성 존재
+        
+        // 중복이 안되는 로또 만들기
+        let lotto_set = new Set()
+        // 난수중복이 얼마나 발생하지 모름
+        // set의 저장 개수가 6일 될때까지 반복하기
+        while( lotto_set.size < 6 ){
+            r = Math.floor(Math.random()*45)+1;
+            lotto_set.add(r)
+        }
+        console.log("로또번호:", lotto_set)
+    </script>
+</head>
+<body>
+</body>
+</html>

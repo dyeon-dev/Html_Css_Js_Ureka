@@ -1,0 +1,35 @@
+<!-- 1. find_number.html 생성
+2. 1~100사이 난수를 생성하여 r에 저장한다.
+3. prompt()함수를 통해 숫자를 입력받는다.
+let ans = prompt("1~100사이숫자입력","")
+4. 입력받은 숫자가 r보다 크면 "낮춰주세요", r보다 작으면 "높여주세요" , r과 같으면 "정답입니다"를 콘솔에 출력한다.
+5. 정답을 맞출때까지 3~4를 반복한다. -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt, parseInt 퀴즈1 </title>
+    <script>
+        let r = Math.floor(Math.random()*100+1);
+        // let ans;
+
+        let cnt=0
+        let max=4
+        while(cnt<max) {
+            var ans = prompt(`1~100사이숫자입력, 시도횟수(${cnt}/${max})`,"")
+
+            if(ans>r) console.log("낮춰주세요") 
+            else if (ans<r) console.log("높여주세요") 
+            else {
+                console.log("정답입니다")
+            }
+            cnt++
+            if(cnt===max) console.log("game over")
+    }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

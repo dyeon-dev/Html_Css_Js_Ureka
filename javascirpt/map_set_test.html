@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Set TEST</title>
+    <script>
+        let map = new Map();
+
+        map.set('1', 'str1');   // 문자형 키
+        map.set(1, 'num1');     // 숫자형 키
+        map.set(true, 'bool1'); // 불린형 키
+
+        // 객체는 키를 문자형으로 변환한다는 걸 기억하고 계신가요?
+        // 맵은 키의 타입을 변환시키지 않고 그대로 유지합니다. 따라서 아래의 코드는 출력되는 값이 다릅니다.
+        alert( map.get(1)   ); // 'num1'
+        alert( map.get('1') ); // 'str1'
+
+        alert( map.size ); // 3
+    </script>
+    <script>
+        let set = new Set();
+
+        let john = { name: "John" };
+        let pete = { name: "Pete" };
+        let mary = { name: "Mary" };
+
+        // 어떤 고객(john, mary)은 여러 번 방문할 수 있습니다.
+        set.add(john);
+        set.add(pete);
+        set.add(mary);
+        set.add(john);
+        set.add(mary);
+
+        // 셋에는 유일무이한 값만 저장됩니다.
+        alert( set.size ); // 3
+
+        for (let user of set) {
+        alert(user.name); // // John, Pete, Mary 순으로 출력됩니다.
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
