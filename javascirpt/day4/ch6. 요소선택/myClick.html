@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Click</title>
+</head>
+<body>
+    <button>클릭하세요</button>
+    <div id="msg"></div>
+
+    <script>
+        let count = 0; //클릭횟수
+        let btn = document.querySelector("button")
+        btn.onclick = function(){
+            count++;
+            let msg = document.querySelector("#msg")
+            msg.innerText = count;
+        }
+    </script>
+</body>
+</html>

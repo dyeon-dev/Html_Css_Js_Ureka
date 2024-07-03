@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function f1() {
+            alert("hello")
+        }
+        function f2(a,b) {
+            alert(a+b)
+        }
+        function f3(a,b) {
+            return a+b
+        }
+        let f4 = function() {
+            alert("f4()")
+        }
+        let f5 = function(a,b) {
+            alert(a+b)
+        }
+        let f6 = function(a,b) { // 익명함수 (이름이 없는 함수)
+            return a+b 
+        }
+        let f7 = () => {
+            alert("hello2")
+        }
+        let f8 = (a,b) => {
+            alert(a+b)
+        }
+        let f9 = (a,b) => a+b
+
+        f1()
+        f2(1,2)
+        alert( f3(1,2) )
+        f4()
+        f5(1,2)
+        alert( f6(1,2) )
+        f7()
+        f8(1,2)
+        alert(f9(1,2))
+    </script>
+</head>
+<body>
+    <h1 onClick=" f7(); ">Function</h1>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my event test 01</title>
+</head>
+<body>
+    <h1>my event test 01</h1>
+    <input type="text" id="num1" placeholder="숫자를 입력하세요">
+    <select id="opr">
+        <option value="">연산자를 선택하세요</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+        <option value="%">%</option>
+    </select>
+    <input type="text" id="num2" placeholder="숫자를 입력하세요">
+    =
+    <input type="text" id="result">
+
+    <script> 
+    //id="opr" -> document.getElementById("opr")
+    //id="opr" -> document.querySelector("#opr")
+        const opr = document.querySelector("#opr")
+        opr.onchange = function() { //opr 선택이 바뀌면 
+            const num1 = document.getElementById('num1').value-0 // 문자열로 받아오기 때문에 -0으로 숫자로 자동변환
+            const num2 = document.getElementById('num2').value-0 // 문자열로 받아오기 때문에 -0으로 숫자로 자동변환
+            // alert(num1+num2+this.value) this.value는 opr 값이다 !
+            let result = ''
+            if(this.value=='+') {
+                result=num1+num2
+            } else if(this.value=='-') {
+                result=num1-num2
+            } else if(this.value=='*') {
+                result=num1*num2
+            } else if(this.value=='/') {
+                if(num2 !== 0) result = num1 / num2
+                else result='0이 아닌 값을 입력해주시오'
+            } else if(this.value=='%') {
+                result=num1%num2
+            } else result='연산자 선택하세요'
+            document.getElementById("result").value=result
+        }
+    </script>
+</body>
+</html>

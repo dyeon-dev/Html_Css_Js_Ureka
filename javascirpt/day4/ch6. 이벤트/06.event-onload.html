@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이벤트::onload</title>
+</head>
+
+<body onload="myFunction()">
+  <script>
+    console.log(1); // 1번째 순서
+
+    function myFunction() {
+      console.log(2); 
+    }
+
+    // 현재 페이지 로딩 완료 후 실행 
+    window.onload = function () {
+      console.log(3); // 3번째 순서
+    }
+
+    window.addEventListener('load', function () {
+      console.log(4); // 4번째 순서
+    });
+
+    console.log(5); // 2번째 순서
+  </script>
+</body>
+</html>

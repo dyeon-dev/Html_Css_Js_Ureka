@@ -20,17 +20,17 @@
         let cnt=0
         let max=10
         while(cnt<max) {
-            var ansX = prompt(`X좌표(1~10사이숫자입력), 시도횟수(${cnt}/${max})`,"")
-            var ansY = prompt(`Y좌표(1~10사이숫자입력), 시도횟수(${cnt}/${max})`,"")
-            dis = Math.round(Math.sqrt( (x-ansX)*(x-ansX) + (y-ansY)*(y-ansY) ))
+            let ansX = prompt(`X좌표(1~10사이숫자입력), 시도횟수(${cnt}/${max})`,"")
+            let ansY = prompt(`Y좌표(1~10사이숫자입력), 시도횟수(${cnt}/${max})`,"")
+            let dis = Math.round(Math.sqrt( (x-ansX)*(x-ansX) + (y-ansY)*(y-ansY) ))
             if (dis==0){
-                console.log("지뢰를 찾았읍니다")
+                alert("지뢰를 찾았읍니다")
                 break;
             }
             cnt++
-            console.log(dis)
+            alert("거리는 "+dis)
 
-            if(cnt===max) console.log("you 바보입니다 "+ x,y)
+            if(cnt===max) alert("you 바보입니다 "+ x,y)
         }
     </script>
 </head>

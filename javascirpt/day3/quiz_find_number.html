@@ -12,20 +12,20 @@ let ans = prompt("1~100사이숫자입력","")
     <title>Prompt, parseInt 퀴즈1 </title>
     <script>
         let r = Math.floor(Math.random()*100+1);
-        // let ans;
 
         let cnt=0
         let max=4
         while(cnt<max) {
-            var ans = prompt(`1~100사이숫자입력, 시도횟수(${cnt}/${max})`,"")
+            let ans = prompt(`1~100사이숫자입력, 시도횟수(${cnt}/${max})`,"")
 
-            if(ans>r) console.log("낮춰주세요") 
-            else if (ans<r) console.log("높여주세요") 
+            if(ans>r) alert("낮춰주세요") 
+            else if (ans<r) alert("높여주세요") 
             else {
-                console.log("정답입니다")
+                alert("정답입니다")
+                break;
             }
             cnt++
-            if(cnt===max) console.log("game over")
+            if(cnt===max) alert("game over")
     }
     </script>
 </head>
