@@ -1,0 +1,94 @@
+<!-- 
+1. my_regist.html 을 생성
+2. form태그 정의  action="my_reg_action.html"
+2. 아이디 입력. 최소 6자이상 : type="text"
+3. 암호입력 : type="password"
+4. 암호확인입력 : type="password"
+5. 성별입력 : 라디오 버튼을 사용
+6. 생년월일입력. yyyyMMdd : type="text 
+-->
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>form::validation</title>
+  <link rel="stylesheet" href="../bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8 m-3">
+        <form method="get" action="my_reg_action.html">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="userId" name="userId">
+            <label for="userId">아이디</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="passwd" name="passwd">
+            <label for="passwd">비밀번호</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="passwdCheck" name="passwdCheck">
+            <label for="passwdCheck">비밀번호 확인입력</label>
+          </div>
+          <div class="form-floating mb-3">
+        <div class="col-sm-10">
+            <label class="col-sm-2 col-form-label">성별</label>
+
+            <div class="form-check">
+            <label><input class="form-check-input" type="radio" name="gender" value="male">남성</label>
+            </div>
+            <div class="form-check">
+            <label><input class="form-check-input" type="radio" name="gender" value="female">여성</label>
+            </div>
+        </div>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="birth" name="birth" pattern="(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])" title="8자리 생년월일">
+            <label for="birth">생년월일입력(yyyyMMdd)</label>
+          </div>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">로그인</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.forms[0].onsubmit = function (event) {
+    const regBirth = /^([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))$/;
+      if (this.userId.value.length < 6) {
+        alert('6글자 이상의 ID를 입력하세요');
+        this.userId.focus(); // 입력 상태 
+        event.preventDefault();
+      } else if ((this.passwd.value.length < 4) || isNaN(this.passwd.value)) { //isNaN: 숫자 아님 
+        alert('4글자 이상의 숫자로된 비밀번호를 입력하세요');
+        this.passwd.focus();
+        event.preventDefault();
+      } else if ((this.passwdCheck.value.length < 4) || isNaN(this.passwdCheck.value)) { //isNaN: 숫자 아님 
+        alert('비밀번호를 확인해주세요');
+        
+        this.passwdCheck.focus();
+        event.preventDefault();
+        
+      } else if(this.passwd.value!=this.passwdCheck.value) {
+            alert("비밀번호가 일치하지 않습니다.")
+            this.passwdCheck.focus();
+            event.preventDefault();
+        } else if ((!this.gender.value)) { 
+        alert('성별을 체크해주시요');
+        event.preventDefault();
+      } 
+     let birthY = document.getElementById("birth").value
+     let birthYear = birthY.substring(0, 4);
+     let age = 2024-birthYear+1
+     alert(`나이는 ${age}살입니다.`);
+    } 
+  </script>
+</body>
+</html>
