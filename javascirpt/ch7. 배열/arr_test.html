@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열 테스트</title>
+    <script>
+        let arr = []; //빈배열
+        // let arr = new Array(); //빈배열
+        arr.push("홍")//맨끝에 추가
+        arr.push("김")//맨끝에 추가
+        console.log(arr)
+        //
+        arr.splice(0,0,"박") // 0번째에 0개삭제 "박" 추가
+        console.log(arr)
+        arr.splice(1,1,"최") // 1번째에서 1개 삭제, 그자리에 최 추가
+        console.log(arr)
+        //
+        arr.sort()
+        console.log("정렬후", arr)
+        arr.reverse()
+        console.log("reverse 후", arr)
+        //연관배열
+        let obj = {}//빈 연관배열
+        obj.name = "홍"
+        obj.age = 30
+        obj.info = function  (){ //익명함수
+            return "name=" + this.name
+        }
+        console.log(obj.info())
+        let obj2 = {}//빈 연관배열
+        obj2["name"] = "김"
+        obj2["age"] = 33
+        obj2["info"] = function  (){ //익명함수
+            return "name=" + this.name
+        }
+        console.log(obj2.info())
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+< lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <button type="button" class="btn_start" onclick="onStart()">게임시작</button>
+    <div id="container"> </div>
+</body>
+<script>
+    function onStart() {
+        let r = Math.floor(Math.random()*100)+1
+        function make_buttons(){
+            let s = ''
+            for(let i=1; i<=100; i++){
+                s += "<button>"+i+"</button>"
+            }
+            document.getElementById("container").innerHTML = s;
+        }
+        function set_events(){
+            let btns = document.querySelectorAll("#container>button")
+            for(let b of btns){
+                b.onclick = function(){
+                    if(this.innerText == r){
+                        this.innerText = "정답"
+                    }else if(this.innerText < r){
+                        this.innerText = "UP"
+                    }else{
+                        this.innerText = "DN"
+                    }
+                }
+            }
+        }
+        make_buttons();
+        set_events()
+    }
+</script>
+</html>

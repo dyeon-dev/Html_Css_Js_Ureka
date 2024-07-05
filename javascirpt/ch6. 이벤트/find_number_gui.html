@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>숫자 맞추기 게임</title>
-    <link rel="stylesheet" href="../../bootstrap-5.3.2-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-5.3.2-dist/css/bootstrap.min.css">
 
     <style>
         .btn {
@@ -16,6 +16,7 @@
 </head>
 <body>
     <button id="start-button" type="button" class="btn btn-primary">게임시작</button>
+    <button onclick="window.location.reload()" class="btn btn-warning">초기화</button>
     <div class="attempts"></div>
     </div>
 
@@ -25,18 +26,19 @@
         let r = 0;
         let attempts = 0;
         let gameStarted = false;
+        let buttons=[]
 
         startButton.onclick = function() {
-            let r = Math.floor(Math.random() * 100) + 1;
+            r = Math.floor(Math.random() * 100) + 1;
             gameStarted=true;
             alert('게임시작이 시작되었어요!');
         };
-        
         for (let i = 1; i <= 100; i++) {
             const button = document.createElement('button');
             button.type = 'button';
             button.className = 'btn btn-success';
             button.innerText = i;
+            buttons.push(button)
             button.onclick = function() {
                 if (!gameStarted) {
                     alert('게임시작 버튼을 먼저 눌러주세요.');
@@ -47,6 +49,7 @@
 
                 if (i === r) {
                     button.innerText = '정답';
+                    buttons.forEach(b => b.disabled=true)
                 } else if (i < r) {
                     button.innerText = 'UP';
                 } else {

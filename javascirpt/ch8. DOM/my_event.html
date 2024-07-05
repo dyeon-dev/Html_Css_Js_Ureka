@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7월 4일 퀴즈</title>
+</head>
+<body>
+    <h1>이벤트 당첨자 등록및 추첨하기</h1>
+    <button id="add_name">이벤트 참여자 등록</button><br>
+    이벤트 참여자 수: <input id="max_names" type="number" value="3">
+    <div>이벤트 참여자 수:<span id="name_count">0명</span></div>
+    <div>이벤트 참여자 목록</div>
+    <div id="names"></div>
+    <button id="get_winner" value="2">이벤트 당첨자 2명 추첨</button>
+    <div>이벤트 당첨자 목록</div>
+    <div id="winners"></div>
+    <!--
+    1. 이벤트 참여자 저장용 배열을 생성한다.
+    2. 이벤트 참여자 등록 버튼 누를때마다 prompt("이벤트 참여자 이름을 입력하세요","")를 통해 참여자 이름을 입력받아 내부 배열에 등록한다.
+    3. 이벤트 참여자 이름을 id="names"에 전체이름을 출력한다.
+    4. 참여자는 이벤트 참여자 수 이상 등록 못하게 한다.
+    5. 참여자 등록할때마다 이벤트 참여자 수: X명 을 반영시킨다.
+    6. 이벤트 당첨자 추첨 버튼 누르면 이벤트 참여자 수 보다 참여자가 적으면 "참여자를 추가하세요" 경고창 표시한다.
+       이벤트 당첨자 추첨 버튼 누르면 이벤트 참여자중 중복되지 않게 2명을 선택하여 이름들을 id="winners" 안에 출력한다.
+    -->
+    <script>
+        let add = document.getElementById("add_name")
+        // 이벤트 참여자 저장용 배열을 생성
+        let arr=[]
+        // 이벤트 참여자 등록 버튼 누를때마다 참여자 이름을 입력받아 내부 배열에 등록
+        add.onclick = function() {
+             let max_names_count = document.getElementById("max_names").value;//최대참여자수
+             // if(name_arr.length == max_names_count){
+            //     alert("최대참여수를 채웠습니다")
+            //     return
+            // }
+
+            let name = prompt("이벤트 참여자 이름을 입력하세요","")
+            arr.push(name)
+            // 이벤트 참여자 이름을 id="names"에 전체이름을 출력
+            //이벤트 참여자 목록
+            let name_str=""
+            // for(let n of arr){
+            //     name_str += " "+n
+            // }
+            name_str=arr.join(" ")
+            document.getElementById("names").innerText=name_str
+            // 참여자는 이벤트 참여자 수 이상 등록 못하게 한다.
+            if(arr.length==max_names_count) {
+                add.disabled=true
+            }
+            // 참여자 등록할때마다 이벤트 참여자 수: X명 을 반영
+            document.getElementById("name_count").innerText=arr.length+"명"
+        }
+        // 이벤트 당첨자 추첨 버튼 누르면 이벤트 참여자 수 보다 참여자가 적으면 "참여자를 추가하세요" 경고창 표시
+        // 이벤트 당첨자 추첨 버튼 누르면 이벤트 참여자중 중복되지 않게 2명을 선택하여 이름들을 id="winners" 안에 출력
+        let getwins = document.getElementById("get_winner")
+        let wins =[]
+        getwins.onclick = function() {
+            let max_winers_count = document.getElementById("get_winner").value;//최대참여자수
+            for(let i=0; i<2; i++) {
+                let r = Math.floor(Math.random()*arr.length)
+                let win_name = arr.splice(r,1) // r번째에서 1개 삭제 
+                wins.push(win_name)
+            }
+            let name_str=""
+            name_str=wins.join(" ")
+            document.getElementById("winners").innerText=name_str
+            alert("이벤트 당첨자를 추첨했습니다")
+            if(wins.length==max_winers_count) {
+                getwins.disabled=true
+            }
+        }
+    </script>
+</body>
+</html>
