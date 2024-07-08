@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX</title>
+  <link rel="stylesheet" href="./bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row my-3">
+      <div class="col-4">
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="button">날씨예보</button>
+         <button class="btn btn-warning" type="button">울릉도 날씨</button>
+        </div>
+      </div>
+      <div class="col-8" id="pocket"></div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('.btn-primary').onclick = function() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'proxy_weather.jsp');
+      xhr.send();
+
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          const doc = this.responseXML;
+          // console.log(doc);
+          const ctg = doc.querySelector('category');
+          // ctg = > <category>서울특별시 중구 광희동</category>
+
+          let listGroup = '';
+          let ctg_title = ctg.childNodes[0].nodeValue;
+
+          listGroup += '<li class="list-group-item">동네이름: ' + ctg_title + '</li>';
+
+          // <data> 추출. <data> 안에 모든 정보있음
+          const data_arr = doc.querySelectorAll('data');
+          for(let data of data_arr){
+            let result=""; // 한번에 출력할 값 저장용
+            let day = data.querySelector("day").childNodes[0].nodeValue;
+            let day_str=["오늘", "내일", "모레"]
+            result += day_str[day]; // 오늘 / 내일 / 모레
+
+            let hour = data.querySelector("hour").childNodes[0].nodeValue;
+            result += " ~"+hour+"시까지 "; // 시간 
+
+            let weather = data.querySelector("wfKor").childNodes[0].nodeValue;
+            result += " 날씨: "+weather // 날씨
+            let r12 = data.querySelector("r12").childNodes[0].nodeValue;  // 강수량
+            let pty = data.querySelector("pty").childNodes[0].nodeValue;  // 강수상태코드 
+            if(pty>0) result += " 강수량: "+r12 // 강수량 
+            
+            let wd = data.querySelector("wdKor").childNodes[0].nodeValue;
+            result += " 풍향: "+wd // 풍향
+
+            let ws = data.querySelector("ws").childNodes[0].nodeValue;
+            result += " 풍속: "+Math.round(ws*10)/10+"m/s" // 풍속
+
+            
+            listGroup += '<li class="list-group-item">' + result + '</li>';
+          }
+
+          document.querySelector('#pocket').innerHTML = '<ul class="list-group">' + listGroup + '</ul>';
+        }
+      };
+    }
+    
+    document.querySelector('.btn-warning').onclick = function() {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', 'proxy_weather_ul.jsp');
+        xhr.send();
+
+        xhr.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            const doc = this.responseXML;
+            // console.log(doc);
+            const ctg = doc.querySelector('category');
+            // ctg = > <category>경상북도 울릉군 울릉읍</category>
+
+            let listGroup = '';
+            let ctg_title = ctg.childNodes[0].nodeValue;
+
+            listGroup += '<li class="list-group-item">동네이름: ' + ctg_title + '</li>';
+
+            // <data> 추출. <data> 안에 모든 정보있음
+            const data_arr = doc.querySelectorAll('data');
+            for(let data of data_arr){
+              let result=""; // 한번에 출력할 값 저장용
+              let day = data.querySelector("day").childNodes[0].nodeValue;
+              let day_str=["오늘", "내일", "모레"]
+              result += day_str[day]; // 오늘 / 내일 / 모레
+
+              let hour = data.querySelector("hour").childNodes[0].nodeValue;
+              result += " ~"+hour+"시까지 "; // 시간 
+
+              let weather = data.querySelector("wfKor").childNodes[0].nodeValue;
+              result += " 날씨: "+weather // 날씨
+              let r12 = data.querySelector("r12").childNodes[0].nodeValue;  // 강수량
+              let pty = data.querySelector("pty").childNodes[0].nodeValue;  // 강수상태코드 
+              if(pty>0) result += " 강수량: "+r12 // 강수량 
+              
+              let wd = data.querySelector("wdKor").childNodes[0].nodeValue;
+              result += " 풍향: "+wd // 풍향
+
+              let ws = data.querySelector("ws").childNodes[0].nodeValue;
+              result += " 풍속: "+Math.round(ws*10)/10+"m/s" // 풍속
+
+              
+              listGroup += '<li class="list-group-item">' + result + '</li>';
+            }
+
+            document.querySelector('#pocket').innerHTML = '<ul class="list-group">' + listGroup + '</ul>';
+          }
+        };
+    }
+  </script>
+</body>
+</html>
