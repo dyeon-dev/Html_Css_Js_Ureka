@@ -23,7 +23,7 @@
     document.querySelector('.btn-primary').onclick = function() {
       const xhr = new XMLHttpRequest();
       // xhr.open('GET', '10.rss.xml');
-      xhr.open('GET', 'https://www.korea.kr/rss/policy.xml'); // 외부에 있는 xml 가져오기 
+      xhr.open('GET', 'https://www.korea.kr/rss/policy.xml'); // 외부에 있는 xml 가져오기 => SOP 특징 때문에 같은 서버에서만 가져오기가 가능하다
       xhr.send();
 
       xhr.onload = function() {
