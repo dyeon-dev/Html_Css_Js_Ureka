@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX</title>
+  <link rel="stylesheet" href="../bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row my-3">
+      <div class="col-4">
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="button">날씨예보</button>
+        </div>
+      </div>
+      <div class="col-8" id="pocket"></div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('.btn-primary').onclick = function() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', '10.ajax-weather.xml');
+      xhr.send();
+
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          const doc = this.responseXML;
+          // console.log(doc);
+          const ctg = doc.querySelector('category');
+          // ctg = > <category>서울특별시 중구 광희동</category>
+
+          let listGroup = '';
+          let ctg_title = ctg.childNodes[0].nodeValue;
+
+          listGroup += '<li class="list-group-item">동네이름: ' + ctg_title + '</li>';
+
+          // 현재온도추출. <temp>가 여러개
+          const temps = doc.querySelectorAll('temp');
+          for(let tmp of temps){
+            let tmp_title = tmp.childNodes[0].nodeValue;
+            listGroup += '<li class="list-group-item">' + tmp_title + '</li>';
+          }
+
+          document.querySelector('#pocket').innerHTML = '<ul class="list-group">' + listGroup + '</ul>';
+        }
+      };
+    }
+  </script>
+</body>
+</html>

@@ -27,7 +27,7 @@
 
   for (let list of lists) {
     list.onclick = function() {
-      const newList = document.createElement('li');
+      const newList = document.createElement('li'); // <li> </li>
       const newAttr = document.createAttribute('class'); // class=""
       newAttr.value = 'list-group-item active'; // class="list-group-item active"
       newList.setAttributeNode(newAttr); // <li class="list-group-item active"> </li>
