@@ -86,7 +86,8 @@
       } 
      let birthY = document.getElementById("birth").value
      let birthYear = birthY.substring(0, 4);
-     let age = 2024-birthYear+1
+     let now = new Date();	// 현재 년도
+     let age = now.getFullYear()-birthYear+1
      alert(`나이는 ${age}살입니다.`);
     } 
   </script>
