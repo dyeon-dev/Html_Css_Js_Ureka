@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX</title>
+  <link rel="stylesheet" href="./bootstrap-5.3.2-dist/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row my-3">
+      <div class="col-4">
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary sports" type="button">스포츠뉴스</button>
+        </div>
+      </div>
+      <div class="col-8" id="pocket"></div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('.sports').onclick = function() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'proxy_html_naver_sports.jsp');
+      xhr.send();
+
+      xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          const doc = this.responseText;
+          // 일반 글자로 처리되기 때문에 후처리 필요 
+          // html 파싱은 html 태그만 제공
+          // responseText를 html DOM 객체에 추가
+          let el = document.createElement("html")
+          
+          el.innerHTML = doc
+          let titles = el.querySelectorAll("ul.today_list	strong.title")
+        
+          let listGroup = '';
+          for(let t of titles){
+            let tmp_title = t.innerHTML;
+            listGroup += '<li class="list-group-item">' + tmp_title + '</li>';
+          }
+
+          document.querySelector('#pocket').innerHTML = '<ul class="list-group">' + listGroup + '</ul>';
+        }
+      };
+    }
+  </script>
+</body>
+</html>
