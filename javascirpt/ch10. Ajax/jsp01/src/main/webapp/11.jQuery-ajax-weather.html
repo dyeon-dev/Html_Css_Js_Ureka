@@ -13,6 +13,7 @@
     <div class="col-4">
       <div class="d-grid gap-2">
         <button class="btn btn-primary weather" type="button">날씨 예보</button>
+        <button class="btn btn-primary news" type="button">네이버 스포츠 뉴스</button>
       </div>
     </div>
     <div class="col-8" id="pocket"></div>
@@ -44,6 +45,25 @@
       $('#pocket').html(newUI);
     });
   });
+  
+  $('.news').click(function () {
+	    $.ajax({
+	      url: 'proxy_html_naver_sports.jsp',
+	      dataType: 'html'
+	    }).done(function (data) {
+	      const items = $(data).find('ul.today_list	strong.title'); // <data>마다 날씨 정보가 존재 
+	      let listGroup = [];
+
+	      $.each(items, function (index, element) { 
+	        let wf = $(element).text();
+
+	        listGroup.push(`<li class="list-group-item list-group-item-action">${wf}</li>`);
+	      });
+
+	      let newUI = `<div class="list-group">${listGroup.join('')}</div>`;
+	      $('#pocket').html(newUI);
+	    });
+	  });
 </script>
 </body>
 </html>
